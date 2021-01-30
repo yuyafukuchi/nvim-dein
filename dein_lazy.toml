@@ -12,14 +12,6 @@ hook_source = '''
 '''
 
 [[plugins]]
-repo = 'rhysd/nyaovim-markdown-preview'
-on_ft = ['markdown', 'mkd']
-hook_source = '''
- let g:markdown_preview_auto = 1
- let g:markdown_preview_eager = get(g:, 'markdown_preview_eager', 1)
-'''
-
-[[plugins]]
 repo = 'rhysd/nyaovim-popup-tooltip'
 
 [[plugins]]
