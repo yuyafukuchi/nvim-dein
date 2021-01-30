@@ -8,7 +8,7 @@ set background=dark
 colorscheme hybrid
 '''
 
-[[plugins]] # serch files
+[[plugins]] # search files
 repo   = 'Shougo/unite.vim'
 hook_add = '''
 let g:unite_enable_start_insert=1
@@ -86,28 +86,6 @@ hook_source = '''
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
-repo='w0rp/ale'
-hook_add='''
-    let g:ale_fixers = {
-    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \   'rust': ['rustfmt'],
-    \}
-    let g:ale_linters = {
-    \   'go': ['gopls'],
-    \   'mkd': ['textlint'],
-    \   'markdown': ['textlint'],
-    \}
-    let g:ale_fix_on_save = 1
-    let g:ale_completion_enabled = 1
-    let g:ale_sign_error = '>>'
-    let g:ale_sign_warning = '--'
-    let g:ale_sign_column_always = 1
-'''
-
-[[plugins]]
-repo='jalvesaq/Nvim-R'
-
-[[plugins]]
 repo='easymotion/vim-easymotion'
 hook_add='''
 let g:EasyMotion_do_mapping = 0
@@ -117,3 +95,52 @@ map s <Plug>(easymotion-overwin-f2)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 '''
+
+[[plugins]]
+repo='prabirshrestha/vim-lsp'
+merged='0'
+hook_add='''
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_highlights_enabled = 0
+let g:lsp_preview_float = 1
+let g:lsp_text_edit_enabled = 0
+let g:lsp_async_completion = 1
+let g:lsp_diagnostics_float_cursor = 1
+nnoremap gd :<C-u>LspDefinition<CR>
+nnoremap gr :<C-u>LspReferences<CR>
+nnoremap gi :<C-u>LspImplementation<CR>
+nnoremap gt :<C-u>LspTypeDefinition<CR>
+nnoremap <leader>rn :<C-u>LspRename<CR>
+nnoremap [g :<C-u>LspPreviousDiagnostic<CR>
+nnoremap ]g :<C-u>LspNextDiagnostic<CR>
+nnoremap K :<C-u>LspHover<CR>
+"python
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+'''
+
+[[plugins]]
+repo='mattn/vim-goimports'
+hook_add='''
+let g:goimports = 1
+let g:goimports_simplify = 1
+'''
+merged='0'
+
+[[plugins]]
+repo='mattn/vim-lsp-settings'
+merged='0'
+
+[[plugins]]
+repo='lighttiger2505/deoplete-vim-lsp'
+
+[[plugins]]
+repo='leafgarland/typescript-vim'
