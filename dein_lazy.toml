@@ -11,20 +11,6 @@ hook_source = '''
   let g:syntastic_check_on_open = 1
 '''
 
-[[plugins]]
-repo = 'rhysd/nyaovim-popup-tooltip'
-
-[[plugins]]
-repo = 'rhysd/nyaovim-markdown-preview'
-on_ft = ['markdown', 'md', 'mkd']
-hook_source = '''
- let g:markdown_preview_auto = 1
- let g:markdown_preview_eager = get(g:, 'markdown_preview_eager', 1)
-'''
-
-[[plugins]]
-repo = 'rhysd/nyaovim-mini-browser'
-
 # Rust
 [[plugins]]
 repo = 'rust-lang/rust.vim'
@@ -77,7 +63,20 @@ on_ft = "coq"
 depends = ["vimbufsync"]
 hook_source = """
 """
+# MarkDown
+[[plugins]]
+repo='plasticboy/vim-markdown'
+on_ft=['markdown','mkd']
+hook_add='''
+    let g:vim_markdown_folding_disabled = 1
+    let g:vim_markdown_auto_insert_bullets = 0
+    let g:vim_markdown_new_list_item_indent = 0
+'''
 
 [[plugins]]
-repo='zah/nim.vim'
-on_ft = "nim"
+on_ft=['markdown','mkd']
+repo = 'godlygeek/tabular'
+
+[[plugins]]
+on_ft=['markdown','mkd', 'md']
+repo = 'kannokanno/previm'
