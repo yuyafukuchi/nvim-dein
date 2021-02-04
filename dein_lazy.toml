@@ -43,6 +43,13 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'deoplete-plugins/deoplete-jedi'
+on_ft = 'py'
+hook_add = '''
+    let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
+'''
+
+[[plugins]]
 repo = 'deoplete-plugins/deoplete-go'
 on_ft = 'go'
 hook_add = '''
