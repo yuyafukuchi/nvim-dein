@@ -25,9 +25,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 '''
 
 [[plugins]]
-repo = 'Xuyuanp/nerdtree-git-plugin'
-
-[[plugins]]
 repo   = 'Shougo/neomru.vim'
 
 [[plugins]] # completion
@@ -96,51 +93,162 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 '''
 
+##[[plugins]]
+##repo='prabirshrestha/vim-lsp'
+##merged='0'
+##hook_add='''
+##let g:lsp_diagnostics_enabled = 0
+##let g:lsp_signs_enabled = 1
+##let g:lsp_diagnostics_echo_cursor = 1
+##let g:lsp_highlights_enabled = 0
+##let g:lsp_preview_float = 1
+##let g:lsp_text_edit_enabled = 0
+##let g:lsp_async_completion = 1
+##let g:lsp_diagnostics_float_cursor = 1
+##nnoremap gd :<C-u>LspDefinition<CR>
+##nnoremap gr :<C-u>LspReferences<CR>
+##nnoremap gi :<C-u>LspImplementation<CR>
+##nnoremap gt :<C-u>LspTypeDefinition<CR>
+##nnoremap gf :<C-u>LspDocumentFormat<CR>
+##nnoremap <leader>rn :<C-u>LspRename<CR>
+##nnoremap [g :<C-u>LspPreviousDiagnostic<CR>
+##nnoremap ]g :<C-u>LspNextDiagnostic<CR>
+##nnoremap K :<C-u>LspHover<CR>
+##"python
+##if executable('pyls')
+##    " pip install python-language-server
+##    au User lsp_setup call lsp#register_server({
+##        \ 'name': 'pyls',
+##        \ 'cmd': {server_info->['pyls']},
+##        \ 'allowlist': ['python'], 
+##	\ 'workspace_config': {
+##             \   'pyls': {
+##             \       'plugins': {
+##             \           'jedi_definition': {
+##             \               'follow_imports': v:true, 
+##             \               'follow_builtin_imports': v:true,
+##             \           },
+##             \           'pyls_mypy': {
+##             \               'enabled': 1,
+##             \           },
+##             \   }
+##        \ })
+##endif
+##
+##if executable('go-langserver')
+##    au User lsp_setup call lsp#register_server({
+##        \ 'name': 'go-langserver',
+##        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
+##        \ 'whitelist': ['go'],
+##        \ })
+##endif
+##
+##if executable('yaml-language-server')
+##    au User lsp_setup call lsp#register_server({
+##        \ 'name': 'yaml-language-server',
+##        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'yaml-language-server --stdio']},
+##        \ 'whitelist': ['yml', 'yaml'],
+##        \ 'workspace_config': {
+##        \   "yaml": {
+##        \     "format.enable": "true",
+##        \     "completion": "true",
+##        \     "customTags": [
+##        \       "!And",
+##        \       "!If",
+##        \       "!Not",
+##        \       "!Equals",
+##        \       "!Or",
+##        \       "!FindInMap",
+##        \       "!Base64",
+##        \       "!Cidr",
+##        \       "!Ref",
+##        \       "!Sub",
+##        \       "!GetAtt",
+##        \       "!GetAZs",
+##        \       "!ImportValue",
+##        \       "!Select",
+##        \       "!Split",
+##        \       "!Join"
+##        \     ],
+##        \     "schemas": {
+##        \       "/Users/neckerskorn/.cache/all-spec.json": "*.yaml"
+##        \     }
+##        \   }
+##        \  }
+##        \ })
+##endif
+##'''
+##
+##[[plugins]]
+##repo='mattn/vim-goimports'
+##hook_add='''
+##let g:goimports = 1
+##let g:goimports_simplify = 1
+##'''
+##merged='0'
+##
+##[[plugins]]
+##repo='mattn/vim-lsp-settings'
+##merged='0'
+##
+##[[plugins]]
+##repo='lighttiger2505/deoplete-vim-lsp'
+##
+##[[plugins]]
+##repo='leafgarland/typescript-vim'
+##
+##[[plugins]]
+##repo = 'prabirshrestha/async.vim'
+##
+
 [[plugins]]
-repo='prabirshrestha/vim-lsp'
-merged='0'
-hook_add='''
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_signs_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_highlights_enabled = 0
-let g:lsp_preview_float = 1
-let g:lsp_text_edit_enabled = 0
-let g:lsp_async_completion = 1
-let g:lsp_diagnostics_float_cursor = 1
-nnoremap gd :<C-u>LspDefinition<CR>
-nnoremap gr :<C-u>LspReferences<CR>
-nnoremap gi :<C-u>LspImplementation<CR>
-nnoremap gt :<C-u>LspTypeDefinition<CR>
-nnoremap <leader>rn :<C-u>LspRename<CR>
-nnoremap [g :<C-u>LspPreviousDiagnostic<CR>
-nnoremap ]g :<C-u>LspNextDiagnostic<CR>
-nnoremap K :<C-u>LspHover<CR>
-"python
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
+repo = "williamboman/nvim-lsp-installer"
+
+[[plugins]]
+ repo = 'neovim/nvim-lspconfig'
+ on_event = 'BufEnter'
+ hook_source = '''
+ lua << EOF
+ local nvim_lsp = require('lspconfig')
+ local on_attach = function (client, bufnr)
+ local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+ local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+local opts = { noremap=true, silent=true }
+ buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+ buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+ buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+ buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+ buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+ buf_set_keymap('n', 'gx', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+ buf_set_keymap('n', 'g[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+ buf_set_keymap('n', 'g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+end
+
+ local lsp_installer = require("nvim-lsp-installer")
+ lsp_installer.on_server_ready(function(server)
+   local opts = {}
+   opts.on_attach = on_attach
+   server:setup(opts)
+   vim.cmd [[ do User LspAttachBuffers ]]
+ end)
+EOF
 '''
 
 [[plugins]]
-repo='mattn/vim-goimports'
-hook_add='''
-let g:goimports = 1
-let g:goimports_simplify = 1
+ repo ='williamboman/nvim-lsp-installer'
+ on_source = 'nvim-lspconfig'
+
+[[plugins]]
+ repo = 'matsui54/denops-signature_help'
+ on_source = 'ddc.vim'
+ hook_source = '''
+ call signature_help#enable()
 '''
-merged='0'
 
 [[plugins]]
-repo='mattn/vim-lsp-settings'
-merged='0'
-
-[[plugins]]
-repo='lighttiger2505/deoplete-vim-lsp'
-
-[[plugins]]
-repo='leafgarland/typescript-vim'
+ repo = 'matsui54/denops-popup-preview.vim'
+ on_source = 'ddc.vim'
+ hook_source = '''
+ call popup_preview#enable()
+'''
